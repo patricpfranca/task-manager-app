@@ -13,6 +13,7 @@ import { NSAngular2TokenService } from './shared/ns-angular2-token/ns-angular2-t
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+import { NativeScriptHttpModule } from 'nativescript-angular/http';
 
 @NgModule({
   bootstrap: [
@@ -20,7 +21,8 @@ import { NSAngular2TokenService } from './shared/ns-angular2-token/ns-angular2-t
   ],
   imports: [
     NativeScriptModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NativeScriptHttpModule
   ],
   declarations: [
     AppComponent,
