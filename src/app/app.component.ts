@@ -19,10 +19,5 @@ export class AppComponent {
         }
       }
     })
-
-    this.tokenService.signIn({
-      email: 'teste@teste.com.br',
-      password: '123456'
-    }).subscribe(res => console.dir(res));
   }
 }
