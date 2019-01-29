@@ -1,8 +1,9 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -23,9 +24,11 @@ import { TokenService } from './shared/token.service';
     AppComponent
   ],
   imports: [
-    NativeScriptModule,
     AppRoutingModule,
-    NativeScriptHttpModule
+    NativeScriptFormsModule,
+    NativeScriptHttpModule,
+    NativeScriptModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
