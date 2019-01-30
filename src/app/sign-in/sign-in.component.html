@@ -30,6 +30,8 @@
         <Label class="font-weight-bold" text="Ocorreu um erro ao tentar efetuar o login" textWrap="true"></Label>
         <Label *ngFor="let error of formErrors" [text]="error" class="text-danger" textWrap="true"></Label>
       </StackLayout>
+
+      <ActivityIndicator [busy]="submitted" *ngIf="submitted" horizontalAlignment="center"></ActivityIndicator>
   
       <Button text="Entrar" class="btn btn-primary" [isEnabled]="form.valid && !submitted" (tap)="signInUser()"></Button>
       <Button text="Criar Conta" pageTransition="slideTop" [nsRouterLink]="['/sign-up']" class="btn btn-outline"></Button>
