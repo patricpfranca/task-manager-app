@@ -21,9 +21,9 @@
         <TextField class="input" keyboardType="email" formControlName="email" autocapitalizationType="none" autocorrect="false"></TextField>
         <StackLayout class="hr-light"></StackLayout>
 
-        <StackLayout *ngIf="form.get('name').invalid && form.get('name').dirty">
-          <Label *ngIf="form.get('name').errors.required" class="text-right text-danger" text="campo obrigatório"></Label>
-          <Label *ngIf="form.get('name').errors.email" class="text-right text-danger" text="email inválido"></Label>
+        <StackLayout *ngIf="form.get('email').invalid && form.get('email').dirty">
+          <Label *ngIf="form.get('email').errors.required" class="text-right text-danger" text="campo obrigatório"></Label>
+          <Label *ngIf="form.get('email').errors.email" class="text-right text-danger" text="email inválido"></Label>
         </StackLayout>
       </StackLayout>
 
