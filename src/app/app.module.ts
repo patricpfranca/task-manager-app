@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -34,7 +35,8 @@ import { TokenService } from './shared/token.service';
     AppComponent,
     HomeComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    TasksComponent
   ],
   providers: [
     AuthGuard,
