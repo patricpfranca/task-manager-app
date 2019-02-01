@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Task } from './shared/model/task.model';
+import { TaskService } from '../shared/task.service';
+
+import * as dialogs from 'ui/dialogs';
 
 @Component({
   selector: 'ns-tasks',
@@ -6,28 +11,66 @@ import { Component } from '@angular/core';
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css']
 })
-export class TasksComponent {
-  public tasks: Array<any> = [];
+export class TasksComponent implements OnInit {
+  public tasks: Array<Task>;
+  public newTask: Task;
   public icons: Map<string, string> = new Map<string, string>();
 
-  constructor() {
-    this.tasks = [
-      { id: 1, title: 'Lavar o carro 1', done: false },
-      { id: 2, title: 'Lavar o carro 2', done: false },
-      { id: 3, title: 'Lavar o carro 3', done: false },
-      { id: 4, title: 'Lavar o carro 4', done: false },
-      { id: 5, title: 'Lavar o carro 5', done: true },
-      { id: 6, title: 'Lavar o carro 1', done: false },
-      { id: 7, title: 'Lavar o carro 2', done: false },
-      { id: 8, title: 'Lavar o carro 3', done: false },
-      { id: 9, title: 'Lavar o carro 4', done: false },
-      { id: 10, title: 'Lavar o carro 5', done: true }
-    ]
-
+  constructor(private taskService: TaskService) {
     this.setIcons();
   }
 
-  public checkboxIcon(task) {
+  ngOnInit() {
+    this.taskService.getAll()
+      .subscribe(
+        tasks => this.tasks = tasks.sort((a, b) => b.id - a.id),
+        error => alert("Ocorreu um erro no servidor, tente mais tarde.")
+      )
+  }
+
+  createTask() {
+    this.newTask.title = this.newTask.title.trim();
+
+    if(!this.newTask.title){
+      alert("A tarefa deve ter um título");
+    }else{
+      this.taskService.create(this.newTask)
+        .subscribe(
+          (task) => {
+            this.tasks.unshift(task);
+            this.newTask = new Task(null, '');
+          },
+          () => alert("Ocorreu um erro no servidor, tente mais tarde.")
+        )
+    }
+  }
+
+  deleteTask(task: Task) {
+    dialogs.confirm(`Deseja realmente excluir a tarefa "${task.title}"`)
+      .then(result => {
+        if ( result ) {
+          this.taskService.delete(task.id)
+            .subscribe(
+              () => this.tasks = this.tasks.filter(t => t !== task),
+              () => alert("Ocorreu um erro no servidor, tente mais tarde.")
+            )
+        }
+      })
+  }
+
+  taskDone(task: Task) {
+    task.done = !task.done;
+
+    this.taskService.update(task)
+      .subscribe({
+        error: () => {
+          task.done = !task.done;
+          alert("Ocorreu um erro no servidor, tente mais tarde.");
+        }
+      })
+  }
+
+  checkboxIcon(task) {
     if (task.done)
       return this.icons.get('checked');
     else
