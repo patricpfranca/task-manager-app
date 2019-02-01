@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './shared/auth.service';
+import { TaskService } from './shared/task.service';
 import { TokenService } from './shared/token.service';
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
@@ -41,6 +42,7 @@ import { TokenService } from './shared/token.service';
   providers: [
     AuthGuard,
     AuthService,
+    TaskService,
     TokenService
   ],
   schemas: [
