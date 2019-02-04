@@ -28,7 +28,7 @@ export class TasksComponent implements OnInit {
       )
   }
 
-  createTask() {
+  public createTask() {
     this.newTask.title = this.newTask.title.trim();
 
     if(!this.newTask.title){
@@ -45,7 +45,7 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  deleteTask(task: Task) {
+  public deleteTask(task: Task) {
     dialogs.confirm(`Deseja realmente excluir a tarefa "${task.title}"`)
       .then(result => {
         if ( result ) {
@@ -58,7 +58,7 @@ export class TasksComponent implements OnInit {
       })
   }
 
-  taskDone(task: Task) {
+  public taskDone(task: Task) {
     task.done = !task.done;
 
     this.taskService.update(task)
@@ -70,7 +70,7 @@ export class TasksComponent implements OnInit {
       })
   }
 
-  checkboxIcon(task) {
+  public checkboxIcon(task) {
     if (task.done)
       return this.icons.get('checked');
     else

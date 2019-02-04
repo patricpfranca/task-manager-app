@@ -2,8 +2,8 @@
 
 <GridLayout class="page" rows="auto, *">
   <GridLayout row="0" columns="*, auto" class="form">
-    <TextField col="0" class="input" hint="digite uma tarefa"></TextField>
-    <Label col="1" [text]="icons.get('add')" class="fa"></Label>
+    <TextField col="0" class="input" hint="digite uma tarefa" [(ngModel)]="newTask.title" (returnPress)="createTask()"></TextField>
+    <Label col="1" [text]="icons.get('add')" class="fa" (tap)="createTask()"></Label>
   </GridLayout>
 
   <ListView class="list-group" row="1" [items]="tasks">
